@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Обчислення значень функції F</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h1>Обчислення значень функції F</h1>
+
+	<label for="startX">Початкове значення x:</label>
+	<input type="number" id="startX" min="-Infinity" max="Infinity" step="0.01" value="-6">
+	<br>
+	<label for="endX">Кінцеве значення x:</label>
+	<input type="number" id="endX" min="-Infinity" max="Infinity" step="0.01" value="6">
+	<br>
+	<label for="step">Крок зміни значень x:</label>
+	<input type="number" id="step" min="0.01" max="Infinity" step="0.01" value="2">
+	<br>
+	<button onclick="calculateValues()">Обчислити</button>
+
+	<div id="result-container"></div>
+
+	<script>
+		function calculateFunction(x) {
+			if (x < 2) {
+				return Math.cos(4 * x) - 5;
+			} else if (x === 2) {
+				return Math.pow(Math.abs(Math.tan(x)), 3);
+			} else {
+				return 2 + Math.cbrt(x);
+				// Або можна використовувати: return 2 + Math.pow(x, 1 / 3);
+			}
+		}
+
+		function calculateValues() {
+			var startX = parseFloat(document.getElementById("startX").value);
+			var endX = parseFloat(document.getElementById("endX").value);
+			var step = parseFloat(document.getElementById("step").value);
+
+			var resultContainer = document.getElementById("result-container");
+			resultContainer.innerHTML = ""; // Очистити контейнер перед виведенням результатів
+
+			for (let x = startX; x <= endX; x += step) {
+				const result = calculateFunction(x);
+				resultContainer.innerHTML += "F(" + x + ") = " + result + "<br>";
+			}
+		}
+	</script>
+</body>
+</html>
